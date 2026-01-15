@@ -5,9 +5,9 @@
    RewriteCond %{REQUEST_FILENAME} !-f
    RewriteCond %{REQUEST_FILENAME} !-d
 
-   # http://localhost/thread/1
+   # http://localhost/hive/1
    RewriteRule ^([^/]+)/([^/]+)/?$ index.php?resource=$1&id=$2 [L,QSA] 
 
-   # http://localhost/thread
+   # http://localhost/hive
    RewriteRule ^([^/\.]+)/?$ index.php?resource=$1 [L]
 </IfModule>
