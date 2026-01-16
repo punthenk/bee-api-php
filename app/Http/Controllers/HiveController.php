@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hive;
+
 class HiveController {
-    public function index(): bool|array {
-        return false;
+    public function index(): ?array {
+        return Hive::getAll();
+    }
+
+    public function find(int $id): ?array {
+        return Hive::find($id);
     }
 }

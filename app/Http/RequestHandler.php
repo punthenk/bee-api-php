@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use App\Http\ApiResponse;
-/* use App\Models\UserModel; */
 use ArgumentCountError;
 use Exception;
 
