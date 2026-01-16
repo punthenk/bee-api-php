@@ -12,6 +12,7 @@ return [
         'inspections' => [App\Http\Controllers\InspectionController::class, 'index'],
         'inspection' => [App\Http\Controllers\InspectionController::class, 'find'],
 
+        'seed' => [App\Seeder\Seed::class, 'seed'],
     ],
     // Create
     'POST' => [

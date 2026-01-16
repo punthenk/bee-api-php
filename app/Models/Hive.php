@@ -27,4 +27,24 @@ class Hive {
         ]);
         return Database::getAll();
     }
+
+    public static function create($data): ?array {
+        if ($data === null || empty($data)) {
+            return null;
+        }
+
+        $query = "
+        INSERT INTO hives
+        (user_id, name, queen_id)
+        VALUES (:user_id, :name, :queen_id)
+        ";
+        Database::query($query, [
+            ":user_id" => $data['user_id'],
+            ":name" => $data['name'],
+            ":queen_id" => $data['queen_id'],
+        ]);
+        $lastID = Database::lastInsertId();
+
+        return ['message' => 'Hive created', 'id' => $lastID] ?? [];
+    }
 }
