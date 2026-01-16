@@ -3,7 +3,8 @@
 return [
     // Get data
     'GET' => [
-        '/test' => [App\Http\Controllers\HiveController::class, 'index'],
+        'hives' => [App\Http\Controllers\HiveController::class, 'index'],
+        'hive' => [App\Http\Controllers\HiveController::class, 'find'],
     ],
     // Create
     'POST' => [
