@@ -12,4 +12,8 @@ class InspectionController {
     public function find(int $id): ?array {
         return Inspection::find($id);
     }
+
+    public function create(array $data): ?array {
+        return Inspection::create($data);
+    }
 }

@@ -12,4 +12,8 @@ class QueenController {
     public function find(int $id): ?array {
         return Queen::find($id);
     }
+
+    public function create(array $data): ?array {
+        return Queen::create($data);
+    }
 }

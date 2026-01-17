@@ -12,4 +12,8 @@ class HiveController {
     public function find(int $id): ?array {
         return Hive::find($id);
     }
+
+    public function create(array $data): ?array {
+        return Hive::create($data);
+    }
 }
