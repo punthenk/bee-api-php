@@ -16,6 +16,7 @@ return [
     ],
     // Create
     'POST' => [
+        'hive' => [App\Http\Controllers\HiveController::class, 'create'],
     ],
     // Update
     'PATCH' => [

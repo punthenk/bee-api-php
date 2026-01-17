@@ -192,7 +192,7 @@ class RequestHandler {
             }
         }
 
-        $data['user_id'] = $this->userId;
+        /* $data['user_id'] = $this->userId; */
 
         if ($data !== null && !empty($data)) {
             $responseValue = $controller->$classMethod($data);
