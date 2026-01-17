@@ -17,6 +17,7 @@ return [
     // Create
     'POST' => [
         'hive' => [App\Http\Controllers\HiveController::class, 'create'],
+        'queen' => [App\Http\Controllers\QueenController::class, 'create'],
     ],
     // Update
     'PATCH' => [

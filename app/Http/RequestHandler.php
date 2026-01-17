@@ -185,7 +185,7 @@ class RequestHandler {
 
         // We check here if all the required data is'nt empty
         foreach ($data as $obj) {
-            if (!isset($obj) || empty($obj)) {
+            if (!isset($obj) || empty($obj) && $obj != 0) {
                 // If one property is empty we give a status NOT FOUND
                 ApiResponse::sendResponse(['error' => 'Not all data found'], ApiResponse::HTTP_STATUS_NOT_FOUND, 'NOT ALL DATA');
                 die();
