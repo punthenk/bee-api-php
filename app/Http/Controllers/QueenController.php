@@ -16,4 +16,8 @@ class QueenController {
     public function create(array $data): ?array {
         return Queen::create($data);
     }
+
+    public function update(array $data): ?array {
+        return Queen::update($data);
+    }
 }
