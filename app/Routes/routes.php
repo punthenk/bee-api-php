@@ -22,6 +22,9 @@ return [
     ],
     // Update
     'PATCH' => [
+        'hive' => [App\Http\Controllers\HiveController::class, 'update'],
+        'inspection' => [App\Http\Controllers\InspectionController::class, 'update'],
+        'queen' => [App\Http\Controllers\QueenController::class, 'update'],
     ],
     'DELETE' => [
     ],

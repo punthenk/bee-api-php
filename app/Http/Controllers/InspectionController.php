@@ -16,4 +16,8 @@ class InspectionController {
     public function create(array $data): ?array {
         return Inspection::create($data);
     }
+
+    public function update(array $data): ?array {
+        return Inspection::update($data);
+    }
 }

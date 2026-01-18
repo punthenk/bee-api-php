@@ -16,4 +16,8 @@ class HiveController {
     public function create(array $data): ?array {
         return Hive::create($data);
     }
+
+    public function update(array $data): ?array {
+        return Hive::update($data);
+    }
 }

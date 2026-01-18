@@ -59,7 +59,8 @@ class Database
             self::$dbStatement->execute($params);
             return self::$dbStatement->rowCount();
         } catch (PDOException $e) {
-            return $e;
+            throw new PDOException($e->getMessage());
+            /* return $e; */
         }
     }
 

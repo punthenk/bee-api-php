@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Database\Database;
+use Exception;
+use PDOException;
 
 class Hive {
 
@@ -46,5 +48,46 @@ class Hive {
         $lastID = Database::lastInsertId();
 
         return ['message' => 'Hive created', 'id' => $lastID] ?? [];
+    }
+
+    public static function update($data): ?array {
+        if ($data['id'] === null || empty($data['id'])) {
+            return ['error' => 'No id given'];
+        }
+
+        $updateableFields = ['name', 'queen_id'];
+        $setParts = [];
+        $params = ['id' => $data['id'], 'updated_at' => date('Y-m-d H:i:s')];
+
+        foreach ($updateableFields as $field) {
+            if (isset($data[$field]) && !empty($data[$field])) {
+                $setParts[] = "$field = :$field";
+                $params[$field] = $data[$field];
+            }
+        }
+
+        if (empty($setParts)) {
+            return [];
+        }
+
+        $query = "
+            UPDATE hives
+            SET " . implode(', ', $setParts) . ", updated_at = :updated_at
+            WHERE id = :id;
+            SELECT ROW_COUNT()
+            AS updated_rows;
+        ";
+
+        try {
+            $updated = Database::query($query, $params);
+
+            if($updated > 0) {
+                return ['message' => 'Hive updated', 'id' => $data['id']];
+            } else {
+                throw new Exception('Hive could not be updated');
+            }
+        } catch (PDOException) {
+            throw new Exception('Database error');
+        }
     }
 }
