@@ -22,6 +22,7 @@ return [
     ],
     // Update
     'PATCH' => [
+        'hive' => [App\Http\Controllers\HiveController::class, 'update'],
     ],
     'DELETE' => [
     ],
