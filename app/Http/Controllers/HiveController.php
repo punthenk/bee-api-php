@@ -20,4 +20,8 @@ class HiveController {
     public function update(array $data): ?array {
         return Hive::update($data);
     }
+
+    public function updateSensorData(array $data): ?array {
+        return Hive::updateSensorData($data);
+    }
 }

@@ -25,6 +25,7 @@ return [
         'hive' => [App\Http\Controllers\HiveController::class, 'update'],
         'inspection' => [App\Http\Controllers\InspectionController::class, 'update'],
         'queen' => [App\Http\Controllers\QueenController::class, 'update'],
+        'sensor' => [App\Http\Controllers\HiveController::class, 'updateSensorData'],
     ],
     'DELETE' => [
     ],

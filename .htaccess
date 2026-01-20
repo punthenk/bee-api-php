@@ -5,9 +5,12 @@
    RewriteCond %{REQUEST_FILENAME} !-f
    RewriteCond %{REQUEST_FILENAME} !-d
 
-   # http://localhost/hive/1
+   # http://localhost/hive/1/sensor (3 segments)
+   RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ index.php?resource=$1&id=$2&subresource=$3 [L,QSA]
+
+   # http://localhost/hive/1 (2 segments)
    RewriteRule ^([^/]+)/([^/]+)/?$ index.php?resource=$1&id=$2 [L,QSA] 
 
-   # http://localhost/hive
+   # http://localhost/hive (1 segment)
    RewriteRule ^([^/\.]+)/?$ index.php?resource=$1 [L]
 </IfModule>

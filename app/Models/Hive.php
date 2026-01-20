@@ -90,4 +90,34 @@ class Hive {
             throw new Exception('Database error');
         }
     }
+
+    public static function updateSensorData(array $data): ?array {
+        if ($data['id'] === null || empty($data['id'])) {
+            return ['error' => 'No id given'];
+        }
+
+        $query = "
+        UPDATE hives
+        SET temperature = :temp, humidity = :hum
+        WHERE id = :id;
+        SELECT ROW_COUNT()
+        AS updated_rows;
+        ";
+
+        try {
+            $updated = Database::query($query, [
+                ':id' => $data['id'],
+                ':temp' => $data['temperature'],
+                ':hum' => $data['humidity']
+            ]);
+
+            if ($updated > 0) {
+                return ['message' => 'Hive updated', 'id' => $data['id']];
+            } else {
+                throw new Exception('Hive could not be updated');
+            }
+        } catch (PDOException) {
+            throw new Exception('Database error');
+        }
+    }
 }
