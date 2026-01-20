@@ -11,6 +11,7 @@ return [
 
         'inspections' => [App\Http\Controllers\InspectionController::class, 'index'],
         'inspection' => [App\Http\Controllers\InspectionController::class, 'find'],
+        'hive-inspections' => [App\Http\Controllers\InspectionController::class, 'getAllFromHive'],
 
         'seed' => [App\Seeder\Seed::class, 'seed'],
     ],

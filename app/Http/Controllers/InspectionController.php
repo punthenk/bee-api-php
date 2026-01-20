@@ -20,4 +20,8 @@ class InspectionController {
     public function update(array $data): ?array {
         return Inspection::update($data);
     }
+
+    public function getAllFromHive(int $id): ?array {
+        return Inspection::getAllFromHive($id);
+    }
 }

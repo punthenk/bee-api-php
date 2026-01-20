@@ -145,4 +145,16 @@ class Inspection {
             throw new Exception('Database error');
         }
     }
+
+    public static function getAllFromHive(int $id): ?array {
+        $query = "
+            SELECT *
+            FROM inspections
+            WHERE hive_id = :id
+        ";
+        Database::query($query, [
+            ":id" => $id,
+        ]);
+        return Database::getAll();
+    }
 }
