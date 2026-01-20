@@ -93,9 +93,10 @@ class RequestHandler {
         $parts = explode('/', $uri);
         $route = $parts[0];
         $id = isset($parts[1]) ? $parts[1] : null;
+        $subresource = isset($parts[2]) ? $parts[2] : null;
 
         // This cuts the URL into a usable array
-        $this->recoures =  ['route' => $route, 'id' => $id];
+        $this->recoures =  ['route' => $route, 'id' => $id, 'subresource' => $subresource];
         $this->id = $id;
 
         if (isset($_POST['id']) && !empty($_POST['id'])) {
@@ -111,6 +112,20 @@ class RequestHandler {
         }
 
         $route = $this->recoures['route'];
+        $subresource = $this->recoures['subresource'] ?? null;
+
+        if ($subresource !== null) {
+            if (isset($this->routes[$this->httpRequestMethod][$subresource])) {
+                return $this->routes[$this->httpRequestMethod][$subresource];
+            }
+
+            ApiResponse::sendResponse(
+                ['error' => 'Route not found'],
+                ApiResponse::HTTP_STATUS_NOT_FOUND,
+                'Not Found'
+            );
+            die();
+        }
 
         if (!isset($this->routes[$this->httpRequestMethod][$route])) {
             ApiResponse::sendResponse(
@@ -226,11 +241,19 @@ class RequestHandler {
         $data = json_decode($jsonData, true);
 
         try {
-            if ($data !== null && !empty($data)) {
-                $responseValue = $controller->$classMethod($data, $this->userId);
-            } else {
-                ApiResponse::sendResponse(['error' => 'No id given'], ApiResponse::HTTP_STATUS_BAD_REQUEST, 'NO ID FOUND');
+            if ($this->id === null || $this->id === 0) {
+                ApiResponse::sendResponse(
+                    ['error' => 'No ID provided in this url'],
+                    ApiResponse::HTTP_STATUS_BAD_REQUEST,
+                    'Missing id'
+                );
                 die();
+            }
+
+            $data['id'] = $this->id;
+
+            if ($data !== null && !empty($data)) {
+                $responseValue = $controller->$classMethod($data);
             }
 
             // We send the API response here
